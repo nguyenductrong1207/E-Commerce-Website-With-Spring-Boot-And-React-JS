@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Client/client-template.html :: head('Bookland Store')"></head>
+
+<body>
+<div class="page-wraper">
+    <!-- Header -->
+    <header th:insert="Client/client-template.html :: header"></header>
+    <!-- Header End -->
+
+    <div class="page-content">
+        <!-- inner page banner -->
+        <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+             style="background-image:url(/Client/images/background/bg3.jpg);">
+            <div class="container">
+                <div class="dz-bnr-inr-entry">
+                    <h1>Checkout</h1>
+                    <nav aria-label="breadcrumb" class="breadcrumb-row">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"> Home</a></li>
+                            <li class="breadcrumb-item">Checkout</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner End-->
+
+        <!-- contact area -->
+        <section class="content-inner-1 changePadding">
+            <!-- Product -->
+            <div class="container">
+                <div class="checkout-space"></div>
+                <form th:action="@{/shop-checkout/processing}" class="shop-form" method="post" th:object="${order}">
+                    <input th:field="*{firstName}" type="hidden">
+                    <input th:field="*{lastName}" type="hidden">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="widget">
+                                <h4 class="widget-title">Billing & Shipping Address</h4>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="firstName" class="checkOutLabel">First Name</label>
+                                        <input th:text="*{firstName}" th:value="${user.firstName}" required type="text"
+                                               class="form-control" id="firstName"
+                                               aria-describedby="firstNameHelp" placeholder="Example: Trong">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="lastName" class="checkOutLabel">Last Name</label>
+                                        <input th:text="*{lastName}" th:value="${user.lastName}" required type="text"
+                                               class="form-control" id="lastName"
+                                               aria-describedby="lastNameHelp" placeholder="Example: Nguyen">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="phone" class="checkOutLabel">Phone</label>
+                                            <input th:text="*{phone}" th:value="${user.phone}" required type="text"
+                                                   class="form-control" id="phone"
+                                                   aria-describedby="phoneHelp"
+                                                   maxlength="10" placeholder="Example: 0988 567 321">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="province" class="form-label">Province</label>
+                                            <select class="form-select" id="province" name="province"
+                                                    th:field="*{orderAddress.province}">
+                                                <option selected hidden th:value="${user.address.province}"
+                                                        th:text="${#strings.isEmpty(user.address.province)}
+                                                                ?'Select':${#strings.substring(user.address.province,2)}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="district" class="form-label">District</label>
+                                            <div class="d-flex justify-content-between">
+                                                <select class="form-select" id="district" name="district"
+                                                        th:field="*{orderAddress.district}">
+                                                    <option selected hidden th:value="${user.address.district}"
+                                                            th:text="${#strings.isEmpty(user.address.district)}
+                                                           ?'Select':${#strings.substring(user.address.district,3)}">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="ward" class="form-label">Ward</label>
+                                            <div class="d-flex justify-content-between">
+                                                <select class="form-select" id="ward" name="ward"
+                                                        th:field="*{orderAddress.ward}">
+                                                    <option selected hidden th:value="${user.address.ward}"
+                                                            th:text="${#strings.isEmpty(user.address.ward)}
+                                                           ?'Select':${user.address.ward}">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="address" class="checkOutLabel">Other Address Information</label>
+                                        <input th:field="*{orderAddress.description}" type="text" class="form-control"
+                                               id="address"
+                                               aria-describedby="addressHelp" placeholder="Example: 720A Dien Bien Phu">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="note" class="checkOutLabel">Extra Notes</label>
+                                        <textarea th:field="*{note}" class="form-control" rows="3" id="note"
+                                                  placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 d-flex flex-column justify-content-between">
+                            <div class="table-responsive">
+                                <table class="table check-tbl">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 20%;">Product</th>
+                                        <th style="width: 35%;">Title</th>
+                                        <th style="width: 25%;">Quantity</th>
+                                        <th style="width: 20%;">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:name="carts" th:each="item:${carts}">
+                                        <tr>
+                                            <td class="product-item-img">
+                                                <img th:src="${item.book.book_image}" alt="Picture have Error">
+                                            </td>
+                                            <td class="product-item-name">
+                                                <p th:text="${item.book.name}"></p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p th:text="'$ '+ ${item.book.price} +' x '+ ${item.quantity}"></p>
+                                            </td>
+
+                                            <td class="product-item-totle subtotal"
+                                                th:id="'subtotal' + ${item.book.book_id}">
+                                                <p th:text="'$ ' + ${item.subtotal}"></p>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="shop-form widget mt-5">
+                                <h4 class="widget-title">Order Total</h4>
+                                <table class="table-bordered check-tbl mb-4">
+                                    <tbody>
+                                    <tr>
+                                        <td>Shipping</td>
+                                        <td>Free Shipping</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td class="product-price-total" th:id="total"
+                                            th:text="'$ ' + ${estimatedTotal}">
+                                            <input type="hidden" th:field="*{totalProductCost}"
+                                                   th:value="${estimatedTotal}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td class="product-price-total" th:id="total"
+                                            th:text="'$ ' + ${estimatedTotal}">
+                                            <input type="hidden" th:field="*{total}" th:value="${estimatedTotal}">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btnhover">Place Order Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="dz-divider bg-gray-dark text-gray-dark icon-center  my-5"><i
+                        class="fa fa-circle bg-white text-gray-dark"></i></div>
+            </div>
+            <!-- Product END -->
+        </section>
+        <!-- contact area End-->
+    </div>
+    <!-- Footer -->
+    <div th:insert="Client/client-template.html :: footer"></div>
+
+    <!-- Footer End -->
+
+</div>
+</body>
+
+</html>

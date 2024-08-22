@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Client/client-template.html :: head('Bookland Store')"></head>
+<body>
+<div class="page-wraper">
+	<div class="error-page overlay-secondary-dark" style="background-image: url(/Client/images/background/bg3.jpg);">
+		<div class="error-inner text-center">
+			<div class="dz_error" data-text="404">404</div>
+			<h2 class="error-head">[[${error}]]</h2>
+			<a th:href="@{/}" class="btn btn-primary btn-border btnhover white-border">BACK TO HOMEPAGE</a>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<div th:insert="Client/client-template.html :: footer"></div>
+
+</body>
+</html>

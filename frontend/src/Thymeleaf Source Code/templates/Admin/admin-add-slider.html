@@ -1,0 +1,87 @@
+<head th:replace="Admin/admin-template.html :: header('Add Slider')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">[[${pageTitle}]]</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form th:action="@{/admin-add-slider/save}" method="post" th:object="${slider}"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" th:field="*{id}">
+                                <input type="hidden" th:field="*{imageUrl}">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Title:</label>
+                                            <input th:field="*{title}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div><label>Is Selected:</label></div>
+                                            <div class="mt-2">
+                                                <input type="radio" th:field="*{isSelected}" value="true"
+                                                       id="selectedTrue">
+                                                <label for="selectedTrue" class="mr-5">Selected</label>
+                                                <input type="radio" th:field="*{isSelected}" value="false"
+                                                       id="selectedFalse">
+                                                <label for="selectedFalse">Not Selected</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Image Slider:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileImage"
+                                                       name="fileImage"
+                                                       accept="image/*">
+                                                <label class="custom-file-label" for="fileImage">Choose file</label>
+                                            </div>
+                                            <img class="img-fluid avatar-100 rounded mt-3" id="thumbnail"
+                                                 alt="Preview"
+                                                 th:src="*{imageUrl}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <label>Category Description:</label>
+                                            <textarea th:field="*{description}" class="form-control"
+                                                      rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                    <button type="reset" class="btn btn-danger">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper END -->
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>

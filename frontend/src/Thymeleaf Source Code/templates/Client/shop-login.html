@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      lang="en">
+
+<head th:replace="Client/client-template.html :: head('Login')"></head>
+
+<body>
+<div class="page-wraper">
+    <!-- Header -->
+    <header th:insert="Client/client-template.html :: header"></header>
+    <!-- Header End -->
+
+    <div class="page-content">
+        <!-- inner page banner -->
+        <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+             style="background-image:url(/Client/images/background/bg3.jpg);">
+            <div class="container">
+                <div class="dz-bnr-inr-entry">
+                    <h1>Login</h1>
+                    <nav aria-label="breadcrumb" class="breadcrumb-row">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/}"> Home</a></li>
+                            <li class="breadcrumb-item">Login</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner End-->
+
+        <!-- contact area -->
+        <section class="content-inner shop-account">
+            <!-- Product -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="login-area">
+                            <div class="tab-content">
+                                <h4>NEW CUSTOMER</h4>
+                                <p>By creating an account with our store, you will be able to move through the
+                                    checkout process faster, store multiple shipping addresses, view and track your
+                                    orders in your account and more.</p>
+                                <a class="btn btn-primary btnhover m-r5 button-lg radius-no"
+                                   th:href="@{/register}">CREATE AN ACCOUNT</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="login-area">
+                            <div class="tab-content nav">
+                                <form id="login" class="tab-pane active col-12" th:action="@{/login}" method="post">
+                                    <h4 class="text-secondary">LOGIN</h4>
+                                    <p class="font-weight-600">If you have an account with us, please log in.</p>
+                                    <div class="mb-4">
+                                        <label for="email" class="label-title">E-MAIL <span
+                                                style="color: red">*</span></label>
+                                        <input name="email" id="email" required="" class="form-control"
+                                               placeholder="Your Email" type="email">
+                                    </div>
+                                    <div>
+                                        <label for="password" class="label-title">PASSWORD <span
+                                                style="color: red">*</span></label>
+                                        <input id="password" name="password" required="" maxlength="20"
+                                               class="form-control "
+                                               placeholder="Type Password" type="password">
+                                        <span toggle="#password"
+                                              class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    </div>
+                                    <div th:if="${param.error}">
+                                        <small class="text-danger">Invalid Username or Password!</small>
+                                    </div>
+                                    <div class="form-check mb-4 mt-2">
+                                        <input class="form-check-input" name="remember-me" type="checkbox" value=""
+                                               id="remember-me">
+                                        <label class="form-check-label" for="remember-me">
+                                            Remember me?
+                                        </label>
+                                    </div>
+                                    <div class="text-left">
+                                        <button type="submit" value="Log in" class="btn btn-primary btnhover me-2">
+                                            login
+                                        </button>
+                                        <a data-bs-toggle="tab" href="#forgot-password" class="m-l5"><i
+                                                class="fas fa-unlock-alt"></i> Forgot Password</a>
+                                    </div>
+                                </form>
+                                <form th:action="@{/forget-password}" id="forgot-password" class="tab-pane fade col-12"
+                                      method="post">
+                                    <h4 class="text-secondary">FORGET PASSWORD ?</h4>
+                                    <p class="font-weight-600">We will send you an email to reset your password.
+                                    </p>
+                                    <div class="mb-3">
+                                        <label for="forgotEmail" class="label-title">E-MAIL *</label>
+
+                                            <input id="forgotEmail"  name="forgotEmail" required="" class="form-control"
+                                                   placeholder="Your Email" type="email">
+                                    </div>
+                                    <div class="text-left">
+                                        <a class="btn btn-outline-secondary btnhover m-r10" data-bs-toggle="tab"
+                                           href="#login">Back</a>
+                                        <button type="submit" class="btn btn-primary btnhover">Send</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product END -->
+        </section>
+        <!-- contact area End-->
+    </div>
+
+    <!-- Footer -->
+    <div th:insert="Client/client-template.html :: footer"></div>
+</div>
+</body>
+</html>

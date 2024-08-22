@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Admin/admin-template.html :: header('Add Author')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">[[${pageTitle}]]</h4>
+                            </div>
+                        </div>
+
+                        <div class="iq-card-body">
+                            <form th:action="@{/admin-add-author/save}" method="post" th:object="${author}"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="id" th:field="*{id}">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Author Name:</label>
+                                            <input type="text" class="form-control" name="name" th:field="*{name}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Date Of Birth:</label>
+                                            <input type="date" class="form-control" name="dob"
+                                                   th:value="${author.dob != null ? #temporals.format(author.dob, 'yyyy-MM-dd') : ''}"
+                                                   th:field="*{dob}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Country:</label>
+                                            <input type="text" class="form-control" name="country"
+                                                   th:field="*{country}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Author Image:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileImage"
+                                                       name="fileImage"
+                                                       accept="image/*">
+                                                <label class="custom-file-label" for="fileImage">Choose file</label>
+                                            </div>
+                                            <img class="img-fluid avatar-100 rounded mt-3" id="thumbnail"
+                                                 alt="Preview" th:src="*{profileImageURL}">
+                                            <input type="hidden" name="existingImageURL" th:value="*{profileImageURL}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <label>Author Description:</label>
+                                            <textarea class="form-control" rows="4" name="description"
+                                                      th:field="*{description}"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper END -->
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
+
+</html>

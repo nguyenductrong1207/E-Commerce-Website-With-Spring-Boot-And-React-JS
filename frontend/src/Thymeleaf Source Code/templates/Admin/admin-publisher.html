@@ -1,0 +1,77 @@
+<head th:replace="Admin/admin-template.html :: header('Publisher')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a th:href="@{'/admin-add-publisher'}" class="btn btn-primary">Add New Publisher</a>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 5%;">No</th>
+                                        <th style="width: 20%">Publisher Name</th>
+                                        <th style="width: 10%">Country</th>
+                                        <th style="width: 25%">Address</th>
+                                        <th style="width: 25%">Email</th>
+                                        <th style="width: 15%">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each=" publisher : ${listPublisher}">
+                                        <tr>
+                                            <td th:text="${publisher.publisher_id}"></td>
+                                            <td th:text="${publisher.publisher_name}"></td>
+                                            <td th:text="${publisher.country}"></td>
+                                            <td th:text="${publisher.publisher_address}"></td>
+                                            <td th:text="${publisher.publisher_email}"></td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action text-center">
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                       title=""
+                                                       data-original-title="Edit"
+                                                       th:href="@{'/admin-publisher/edit/' + ${publisher.publisher_id}}"><i
+                                                            class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                       title=""
+                                                       data-original-title="Delete"
+                                                       th:href="@{'/admin-publisher/delete/' + ${publisher.publisher_id}}"><i
+                                                            class="ri-delete-bin-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Wrapper END -->
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>

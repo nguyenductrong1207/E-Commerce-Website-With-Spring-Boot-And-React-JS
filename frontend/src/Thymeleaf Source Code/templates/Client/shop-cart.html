@@ -1,0 +1,188 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Client/client-template.html :: head('Bookland Store')"></head>
+
+<body>
+<div class="page-wraper">
+    <!-- Header -->
+    <header th:insert="Client/client-template.html :: header"></header>
+    <!-- Header End -->
+
+    <div class="page-content">
+        <!-- inner page banner -->
+        <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+             style="background-image:url(/Client/images/background/bg3.jpg);">
+            <div class="container">
+                <div class="dz-bnr-inr-entry">
+                    <h1>Cart</h1>
+                    <nav aria-label="breadcrumb" class="breadcrumb-row">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/"> Home</a></li>
+                            <li class="breadcrumb-item">Cart</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner End-->
+
+        <!-- contact area -->
+        <section class="content-inner shop-account mt-2">
+            <!-- Product -->
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table check-tbl">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Product</th>
+                                    <th>Product name</th>
+                                    <th>Price</th>
+                                    <th>Sale Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each="carts, status:${carts}">
+                                    <tr th:id="'row'+${status.count}">
+                                        <td class="divCount" th:text="${status.count} + '.'"></td>
+                                        <td class="product-item-img">
+                                            <a th:href="@{'/books-detail/' + ${carts.book.book_id}}">
+                                                <img th:src="${carts.book.book_image}" alt="Picture have Error">
+                                            </a>
+                                        </td>
+                                        <td class="product-item-name">
+                                            <a th:href="@{'/books-detail/' + ${carts.book.book_id}}"
+                                               th:text="${carts.book.name}">
+                                            </a>
+                                        </td>
+                                        <td class="product-item-price">
+                                            <del th:text="'$ ' + ${carts.book.price}"></del>
+                                        </td>
+                                        <td class="product-item-sale-price" th:text="'$ ' + ${carts.book.salePrice}"></td>
+
+                                        <td class="product-item-quantity">
+                                            <div class="quantity btn-quantity style-1 me-3">
+                                                <div class="quantity btn-quantity style-1 me-3">
+                                                    <div class="input-group bootstrap-touchspin">
+                                                        <span class="input-group-addon bootstrap-touchspin-prefix"
+                                                              style="display: none;"></span>
+                                                        <input id="" type="text"
+                                                               th:value="${carts.quantity}"
+                                                               th:id="'quantity' + ${carts.book.book_id}"
+                                                               onkeydown="return false;" name=""
+                                                               class="form-control" style="display: block;">
+                                                        <span class="input-group-addon bootstrap-touchspin-postfix"
+                                                              style="display: none;"></span>
+                                                        <span class="input-group-btn-vertical">
+                                                            <button class="btn btn-default bootstrap-touchspin-up plus"
+                                                                    type="button" th:pid="${carts.book.book_id}">
+                                                                <i class="ti-plus"></i>
+                                                            </button>
+                                                            <button class="btn btn-default bootstrap-touchspin-down minus"
+                                                                    type="button" th:pid="${carts.book.book_id}">
+                                                                <i class="ti-minus"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="product-item-totle subtotal"
+                                            th:id="'subtotal' + ${carts.book.book_id}"
+                                            th:text="'$ ' + ${carts.getSubtotal()}">
+                                        </td>
+                                        <td class="product-item-close">
+                                            <a th:href="@{'/shop-cart/remove/' + ${carts.book.book_id}}"
+                                               th:rowNumber="${status.count}"
+                                               class="ti-close removeBook">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <!--                    <div class="col-lg-6">-->
+                    <!--                        <div class="widget">-->
+                    <!--                            <form class="shop-form">-->
+                    <!--                                <h4 class="widget-title">Add Coupon</h4>-->
+                    <!-- <div class="form-group">
+                        <select class="default-select">
+                            <option selected>Credit Card Type</option>
+                            <option value="1">Another option</option>
+                            <option value="2">A option</option>
+                            <option value="3">Potato</option>
+                        </select>
+                    </div> -->
+                    <!-- <div class="row">
+                        <div class="form-group col-lg-6">
+                            <input type="text" class="form-control" placeholder="Credit Card Number">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" class="form-control"
+                                placeholder="Card Verification Number">
+                        </div>
+                    </div> -->
+                    <!--                                <div class="form-group">-->
+                    <!--                                    <input type="text" class="form-control" placeholder="Coupon Code">-->
+                    <!--                                </div>-->
+                    <!--                                <div class="form-group">-->
+                    <!--                                    <a href="shop-cart" class="btn btn-primary btnhover" type="button">Apply-->
+                    <!--                                        Coupon</a>-->
+                    <!--                                </div>-->
+                    <!--                            </form>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="col-lg-6 mb-2" id="sectionTotal">
+                        <div class="widget">
+                            <h4 class="widget-title">Cart Total</h4>
+                            <table class="table-bordered check-tbl m-b25">
+                                <tbody>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td>Free Shipping</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td>Coupon</td>
+                                    <td>$28.00</td>
+                                </tr> -->
+                                <tr>
+                                    <td>Total</td>
+                                    <td th:id="total" th:text="'$ ' + ${estimatedTotal}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group m-b25">
+                                <a href="shop-checkout" class="btn btn-primary btnhover" type="button">Proceed to
+                                    Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product END -->
+        </section>
+        <!-- contact area End-->
+    </div>
+    <!-- Footer -->
+    <div th:insert="Client/client-template.html :: footer"></div>
+    <!-- Footer End -->
+</div>
+<script type="text/javascript">
+    contextPath = "[[@{/}]]";
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
+</script>
+</script>
+</body>
+</html>

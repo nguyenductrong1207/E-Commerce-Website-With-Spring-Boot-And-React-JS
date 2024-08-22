@@ -1,0 +1,75 @@
+<head th:replace="Admin/admin-template.html :: header('Add Category')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">[[${pageTitle}]]</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form th:action="@{/admin-add-publisher/save}" method="post" th:object="${publisher}">
+                                <input type="hidden" th:field="*{publisher_id}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Publisher Name:</label>
+                                            <input class="form-control" maxlength="45" minlength="3" required
+                                                   th:field="*{publisher_name}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Email:</label>
+                                            <input class="form-control" maxlength="45" minlength="3" required
+                                                   th:field="*{publisher_email}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Address:</label>
+                                            <input class="form-control" maxlength="45" minlength="3" required
+                                                   th:field="*{publisher_address}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country:</label>
+                                            <input class="form-control" maxlength="45" minlength="3" required
+                                                   th:field="*{country}"
+                                                   type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper END -->
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
