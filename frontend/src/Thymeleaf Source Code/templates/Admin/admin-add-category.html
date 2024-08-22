@@ -1,0 +1,51 @@
+<head th:replace="Admin/admin-template.html :: header('Add Category')">
+</head>
+
+<body>
+   <div class="wrapper">
+      <!-- Sidebar  -->
+      <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+      </div>
+
+      <!-- Top Nav Bar -->
+      <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+      </div>
+
+      <!-- Page Content  -->
+      <div id="content-page" class="content-page">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="iq-card">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">[[${pageTitle}]]</h4>
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        <form th:action="@{/admin-add-category/save}" method="post" th:object="${category}">
+                           <input type="hidden" th:field="*{id}">
+
+                           <div class="form-group">
+                              <label>Category Name:</label>
+                              <input class="form-control" maxlength="45" minlength="3" required th:field="*{name}"
+                                     type="text">
+                           </div>
+                           <div class="form-group">
+                              <label>Category Description:</label>
+                              <textarea th:field="*{description}" class="form-control" rows="4"></textarea>
+                           </div>
+                           <button type="submit" class="btn btn-primary">Submit</button>
+                           <button type="reset" class="btn btn-danger">Reset</button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Wrapper END -->
+   <div th:replace="Admin/admin-template.html :: footer">
+   </div>
+</body>

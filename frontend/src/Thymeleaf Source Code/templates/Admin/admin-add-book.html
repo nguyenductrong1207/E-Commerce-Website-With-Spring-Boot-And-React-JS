@@ -1,0 +1,135 @@
+<head th:replace="Admin/admin-template.html :: header('Add Book')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">[[${pageTitle}]]</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form th:action="@{/admin-add-book/save}" method="post" th:object="${book}" enctype="multipart/form-data" id="bookForm">
+                                <input type="hidden" th:field="*{book_id}">
+                                <input type="hidden" th:field="*{book_image}">
+                                <div class="form-group mb-4">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Book Name:</label>
+                                            <input type="text" class="form-control" th:field="*{name}" id="bookName">
+                                            <div class="error" id="bookNameError"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="publisher">Publisher:</label>
+                                                    <select th:field="*{publisher}" id="publisher" name="publisher" class="form-control">
+                                                        <th:block th:each="publisher : ${publishers}">
+                                                            <option th:value="${publisher.publisher_id}" th:text="${publisher.publisher_name}"></option>
+                                                        </th:block>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="iq-card-header-toolbar ">
+                                                        <label for="author">Book Author:</label>
+                                                        <a th:href="@{'/admin-add-author'}" class="btn btn-primary">Add New Author</a>
+                                                    </div>
+                                                    <select th:field="*{author}" id="author" name="author" class="form-control">
+                                                        <th:block th:each="author : ${authors}">
+                                                            <option th:value="${author.id}" th:text="${author.name}"></option>
+                                                        </th:block>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Book Image:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileImage" name="bookImage" accept="image/*">
+                                                <label class="custom-file-label" for="fileImage">Choose file</label>
+                                            </div>
+                                            <img class="img-fluid avatar-100 rounded mt-3" id="thumbnail" alt="Preview" th:src="*{book_image}">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <label>Book Category:</label>
+                                            <div class="row">
+                                                <div class="col-md-3" th:each="category: ${categories}">
+                                                    <input name="categories" type="checkbox" th:field="${book.categories}" th:value="${category.id}">
+                                                    <label th:text="${category.name}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Book Publication Date:</label>
+                                            <input type="date" class="form-control" th:field="*{publication_date}" id="publicationDate">
+                                            <div class="error" id="publicationDateError"></div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Book Language:</label>
+                                            <input type="text" class="form-control" th:field="*{language}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Book Price:</label>
+                                            <input type="text" class="form-control" th:field="*{price}" id="bookPrice">
+                                            <div class="error" id="bookPriceError"></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Book Quantity:</label>
+                                            <input type="text" class="form-control" th:field="*{quantity}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Number of Pages:</label>
+                                            <input type="text" class="form-control" th:field="*{num_pages}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label>Book Description:</label>
+                                    <textarea rows="1" th:field="*{description}" id="description" class="form-control"></textarea>
+                                    <div class="error" id="descriptionError"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper END -->
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#description").richText();
+    })
+</script>

@@ -1,0 +1,106 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Client/client-template.html :: head('Bookland Store')"></head>
+
+<body>
+<div class="page-wraper">
+    <!-- Header -->
+    <header th:insert="Client/client-template.html :: header"></header>
+    <!-- Header End -->
+
+    <div class="page-content">
+        <!-- inner page banner -->
+        <div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+             style="background-image:url(/Client/images/background/bg3.jpg);">
+            <div class="container">
+                <div class="dz-bnr-inr-entry">
+                    <h1>Order Detail</h1>
+                    <nav aria-label="breadcrumb" class="breadcrumb-row">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/order-history"> Order History</a></li>
+                            <li class="breadcrumb-item">Order Detail</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- inner page banner End-->
+
+        <!-- contact area -->
+        <section class="content-inner shop-account mt-2">
+            <!-- Product -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mb-2" id="sectionTotal">
+                        <div class="widget">
+                            <h4 class="widget-title">Order Information</h4>
+                            <table class="table-bordered check-tbl m-b25">
+                                <tbody>
+                                <tr>
+                                    <td>Order Date</td>
+                                    <td th:text="${order.createdDate}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Price</td>
+                                    <td th:text="${order.total}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td th:text="${order.orderStatus}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table check-tbl">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">No.</th>
+                                        <th class="text-center">Product</th>
+                                        <th>Product name</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Subtotal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="item, status : ${order.orderItems}">
+                                        <tr th:id="'row'+${status.count}">
+                                            <td class="divCount text-center align-content-center"
+                                                th:text="${status.count} + '.'"></td>
+                                            <td class="product-item-img">
+                                                <img th:src="@{${item.book.book_image}}" alt="Book Image"
+                                                     style="max-width: 100px;"/>
+                                            </td>
+                                            <td class="product-item-name" th:text="${item.book.name}"></td>
+                                            <td class="product-item-total text-center" th:text="'$ ' + ${item.unitPrice}"></td>
+                                            <td class="product-item-quantity text-center" th:text="${item.quantity}"></td>
+                                            <td class="product-item-total text-center" th:text="'$ ' + ${item.subtotal}"></td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Product END -->
+        </section>
+        <!-- contact area End-->
+    </div>
+    <!-- Footer -->
+    <div th:insert="Client/client-template.html :: footer"></div>
+    <!-- Footer End -->
+</div>
+<script type="text/javascript">
+    contextPath = "[[@{/}]]";
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
+</script>
+</script>
+</body>
+</html>

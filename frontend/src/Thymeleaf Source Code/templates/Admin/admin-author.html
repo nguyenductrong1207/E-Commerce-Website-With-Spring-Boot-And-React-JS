@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Admin/admin-template.html :: header('Author')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+
+                                <a th:href="@{'/admin-add-author'}" class="btn btn-primary">Add New Author</a>
+
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 5%;">No</th>
+                                        <th style="width: 10%;">Profile</th>
+                                        <th style="width: 15%;">Author Name</th>
+                                        <th style="width: 20%;">Date Of Birth</th>
+                                        <th style="width: 10%;">Country</th>
+                                        <th style="width: 30%;">Author Description</th>
+                                        <th class="text-center" style="width: 10%;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="author :${authors}">
+                                        <td class="text-center" th:text="${author.id}"></td>
+                                        <td>
+                                            <img th:src="${author.profileImageURL}" class="img-fluid avatar-50 rounded"
+                                                 alt="author-profile">
+                                        </td>
+                                        <td th:text="${author.name}"></td>
+                                        <td th:text="${author.dob}"></td>
+                                        <td th:text="${author.country}"></td>
+                                        <td th:text="${author.description}">
+                                            <p class="mb-0"></p>
+                                        </td>
+                                        <td>
+                                            <div class="flex align-items-center list-user-action text-center">
+                                                <a th:href="@{'/admin-author/edit/' + ${author.id}}" class="bg-primary"
+                                                   data-toggle="tooltip" data-placement="top" title=""
+                                                   data-original-title="Edit"><i class="ri-pencil-line"></i></a>
+
+                                                <a th:href="@{'/admin-author/delete/' + ${author.id}}"
+                                                   class="bg-primary"
+                                                   data-toggle="tooltip" data-placement="top" title=""
+                                                   data-original-title="Delete" href="#"><i
+                                                        class="ri-delete-bin-line"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Wrapper END -->
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
+
+</html>

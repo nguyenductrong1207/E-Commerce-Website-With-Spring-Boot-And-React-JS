@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Admin/admin-template.html :: header('Sliders')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a th:href="@{'/admin-add-slider'}" class="btn btn-primary">Add New Slider</a>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 5%;">No</th>
+                                        <th style="width: 15%;">Image URL</th>
+                                        <th style="width: 20%;">Title</th>
+                                        <th style="width: 50%;">Description</th>
+                                        <th style="width: 10%;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="slider : ${sliders}">
+                                        <tr>
+                                            <td th:text="${slider.id}"></td>
+                                            <td>
+                                                <img class="img-fluid" alt="sliderImage" th:src="${slider.imageUrl}"/>
+                                            </td>
+                                            <td th:text="${slider.title}"></td>
+                                            <td th:text="${slider.description}"></td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action text-center">
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                       title=""
+                                                       data-original-title="Edit"
+                                                       th:href="@{'/admin-sliders/edit/' + ${slider.id}}"><i
+                                                            class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                       title=""
+                                                       data-original-title="Delete"
+                                                       th:href="@{'/admin-sliders/delete/' + ${slider.id}}"><i
+                                                            class="ri-delete-bin-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Wrapper END -->
+<div class="modal fade" id="orderDetailModal">
+    <div class="modal-dialog modal-xL">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
+
+</html>

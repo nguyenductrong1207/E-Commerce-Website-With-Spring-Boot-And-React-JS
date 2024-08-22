@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Client/client-template.html :: head('FAQ')"></head>
+
+<body>
+	<div class="page-wraper">
+		<!-- Header -->
+		<header th:insert="Client/client-template.html :: header"></header>
+		<!-- Header End -->
+
+		<div class="page-content">
+			<!-- inner page banner -->
+			<div class="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm"
+				style="background-image:url(/Client/images/background/bg3.jpg);">
+				<div class="container">
+					<div class="dz-bnr-inr-entry">
+						<h1>FAQ's</h1>
+						<nav aria-label="breadcrumb" class="breadcrumb-row">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a th:href="@{/}"> Home</a></li>
+								<li class="breadcrumb-item">FAQ's</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- inner page banner End-->
+			<!-- FAQ Content Start -->
+			<section class="main-faq-content content-inner">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 align-self-center mb-4">
+							<div class="faq-content-box">
+								<div class="section-head">
+									<h2 class="title">What Is Bookland?</h2>
+									<p> Dive into the enchanting realm where words come to life and ideas unfold.
+										Discover a captivating universe of literature and knowledge, as Bookland unveils
+										itself as the ultimate sanctuary for readers and seekers of wisdom. Uncover the
+										magic that resides within its pages, inviting you to explore, learn, and escape
+										into the boundless wonders of imagination</p>
+								</div>
+								<div class="faq-accordion">
+									<div class="accordion" id="accordionExample">
+										<div class="card">
+											<div class="card-header" id="headingOne">
+												<h3 class="title" data-bs-toggle="collapse"
+													data-bs-target="#collapseOne" aria-expanded="false"
+													aria-controls="collapseOne"><span> What exactly is Bookland?</span>
+													<span class="icon"><i class="fa fa-angle-left"
+															aria-hidden="true"></i></span>
+												</h3>
+											</div>
+											<div id="collapseOne" class="collapse accordion-collapse"
+												aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+												<div class="card-body">
+													<p>Bookland is a literary haven, a curated space that transcends the
+														conventional bookstore. It's an immersive world where readers
+														can explore a diverse collection of books, ranging from timeless
+														classics to contemporary gems.</p>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingTwo">
+												<h3 class="title" data-bs-toggle="collapse"
+													data-bs-target="#collapseTwo" aria-expanded="false"
+													aria-controls="collapseTwo"><span>How is Bookland different from
+														traditional bookstores?</span> <span class="icon"><i
+															class="fa fa-angle-left" aria-hidden="true"></i></span></h3>
+											</div>
+											<div id="collapseTwo" class="collapse accordion-collapse"
+												aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+												<div class="card-body">
+													<p>Unlike traditional bookstores, Bookland is not just a place to
+														buy books; it's an experience. Beyond the shelves, it offers a
+														curated selection, a welcoming atmosphere, and often hosts
+														literary events, making it a community hub for bibliophiles.</p>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h3 class="title" data-bs-toggle="collapse"
+													data-bs-target="#collapseThree" aria-expanded="false"
+													aria-controls="collapseThree"><span>Can anyone access Bookland, or
+														is it limited to certain genres?</span> <span class="icon"><i
+															class="fa fa-angle-left" aria-hidden="true"></i></span></h3>
+											</div>
+											<div id="collapseThree" class="collapse accordion-collapse"
+												aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+												<div class="card-body">
+													<p>Bookland is inclusive and caters to a wide range of interests. It
+														encompasses diverse genres, ensuring there's something for
+														everyone. Whether you're a fiction enthusiast, a non-fiction
+														connoisseur, or exploring niche subjects, Bookland welcomes all
+														to embark on a literary journey.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6 order-lg-2 order-1 mb-4">
+							<div class="faq-img-box wow left-animation rounded-md" data-wow-delay="0.2s">
+								<img src="Client/images/about/pic2.jpg" alt="FAQ Image">
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+			<section class="main-faq-content bg-light content-inner">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 mb-4">
+							<div class="faq-img-box rounded-md">
+								<img src="Client/images/about/pic1.jpg" alt="FAQ Image">
+							</div>
+						</div>
+						<div class="col-lg-6 align-self-center mb-4">
+							<div class="faq-content-box">
+								<div class="section-head">
+									<h2 class="title">Managing Books</h2>
+									<p>Delve into the art of organizing and optimizing your literary collection with
+										'Managing Books.' Uncover practical insights and expert tips on cataloging,
+										storage solutions, and creating a well-structured library at home. From
+										decluttering your shelves to implementing digital management systems, embark on
+										a journey to efficiently manage your books and enhance your reading experience.
+									</p>
+								</div>
+								<div class="faq-accordion">
+									<div class="accordion" id="accordionExample2">
+										<div class="card">
+											<div class="card-header" id="headingFour">
+												<h3 class="title" data-bs-toggle="collapse"
+													data-bs-target="#collapseFour" aria-expanded="false"
+													aria-controls="collapseFour"><span>How can I effectively organize my
+														book collection?</span> <span class="icon"><i
+															class="fa fa-angle-left" aria-hidden="true"></i></span></h3>
+											</div>
+											<div id="collapseFour" class="collapse accordion-collapse"
+												aria-labelledby="headingFour" data-bs-parent="#accordionExample2">
+												<div class="card-body">
+													<p>Efficiently organizing your book collection involves
+														categorization, such as by genre, author, or theme. Consider
+														implementing a system that suits your preferences, whether it's
+														alphabetical, chronological, or based on personal significance.
+														Regularly reviewing and decluttering your collection ensures it
+														stays well-managed.</p>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingFive">
+												<h3 class="title" data-bs-toggle="collapse"
+													data-bs-target="#collapseFive" aria-expanded="false"
+													aria-controls="collapseFive"><span> Is it advisable to mix physical
+														and digital book management systems?</span> <span
+														class="icon"><i class="fa fa-angle-left"
+															aria-hidden="true"></i></span></h3>
+											</div>
+											<div id="collapseFive" class="collapse accordion-collapse"
+												aria-labelledby="headingFive" data-bs-parent="#accordionExample2">
+												<div class="card-body">
+													<p>Yes, combining physical and digital systems can offer the best of
+														both worlds. Utilize apps or software for digital cataloging
+														while maintaining a well-organized physical arrangement. This
+														integration allows for easy tracking, accessibility, and a
+														comprehensive overview of your entire collection.</p>
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingSix">
+												<h3 class="title" data-bs-toggle="collapse"
+													data-bs-target="#collapseSix" aria-expanded="false"
+													aria-controls="collapseSix"><span> How do I protect my books from
+														damage over time?</span> <span class="icon"><i
+															class="fa fa-angle-left" aria-hidden="true"></i></span></h3>
+											</div>
+											<div id="collapseSix" class="collapse accordion-collapse"
+												aria-labelledby="headingSix" data-bs-parent="#accordionExample2">
+												<div class="card-body">
+													<p>To safeguard your books, store them in a cool, dry place away
+														from direct sunlight. Utilize bookends to prevent leaning, and
+														consider using protective covers for delicate editions.
+														Regularly dust your shelves and handle books with clean hands to
+														minimize wear. Implementing these practices helps preserve the
+														longevity of your cherished collection.</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- FAQ Content End -->
+
+			<!-- Feature Box -->
+			<section class="content-inner bg-white">
+				<div class="container">
+					<div class="row sp15">
+						<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+							<div class="icon-bx-wraper style-2 m-b30 text-center">
+								<div class="icon-bx-lg">
+									<i class="fa-solid fa-users icon-cell"></i>
+								</div>
+								<div class="icon-content">
+									<h2 class="dz-title counter m-b0">125,663</h2>
+									<p class="font-20">Happy Customers</p>
+								</div>
+							</div>
+						</div>
+						<div class=" col-lg-3 col-md-6 col-sm-6 col-6">
+							<div class="icon-bx-wraper style-2 m-b30 text-center">
+								<div class="icon-bx-lg">
+									<i class="fa-solid fa-book icon-cell"></i>
+								</div>
+								<div class="icon-content">
+									<h2 class="dz-title counter m-b0">50,672</h2>
+									<p class="font-20">Book Collections</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+							<div class="icon-bx-wraper style-2 m-b30 text-center">
+								<div class="icon-bx-lg">
+									<i class="fa-solid fa-store icon-cell"></i>
+								</div>
+								<div class="icon-content">
+									<h2 class="dz-title counter m-b0">1,562</h2>
+									<p class="font-20">Our Stores</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-6 col-6">
+							<div class="icon-bx-wraper style-2 m-b30 text-center">
+								<div class="icon-bx-lg">
+									<i class="fa-solid fa-leaf icon-cell"></i>
+								</div>
+								<div class="icon-content">
+									<h2 class="dz-title counter m-b0">457</h2>
+									<p class="font-20">Famous Writers</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Feature Box End -->
+		</div>
+
+		<!-- Footer -->
+		<div th:insert="Client/client-template.html :: footer"></div>
+		<!-- Footer End -->
+	</div>
+</body>
+</html>

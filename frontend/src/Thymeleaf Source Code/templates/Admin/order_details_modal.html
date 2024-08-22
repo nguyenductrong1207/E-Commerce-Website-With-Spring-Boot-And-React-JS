@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+</head>
+
+<body>
+<div class="modal-header">
+    <h4 class="modal-title">Order Details</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+
+<div class="container" style="margin: 20px">
+    <div class="row">
+        <div class="col-md-12">
+            <form th:action="@{/admin-add-order/save}" th:object="${order}" method="post">
+                <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                <input type="hidden" th:field="*{orderAddress}" th:value="${order.orderAddress}"/>
+                <input type="hidden" th:field="*{user}" th:value="${order.user}"/>
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{total}"/>
+                <input type="hidden" th:field="*{deliverDays}"/>
+                <input type="hidden" th:field="*{phone}"/>
+                <input type="hidden" th:field="*{totalProductCost}"/>
+                <!--                <div class="form-group row">-->
+                <!--                    <label class="col-sm-4 col-form-label">Order ID:</label>-->
+                <!--                    <div class="col-sm-8">-->
+                <!--                        <input type="text" th:field="*{id}" readonly class="form-control" th:value="${order.id}">-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group col-sm-11">
+                            <label class="form-label">Name:</label>
+                            <!--                    <div class="col-sm-8">-->
+                            <input type="hidden" th:field="*{firstName}"/>
+                            <input type="hidden" th:field="*{lastName}"/>
+                            <input type="text" readonly class="form-control"
+                                   th:value="${order.firstName +' '+ order.lastName}">
+                            <!--                    </div>-->
+                        </div>
+                        <div class="form-group col-sm-11">
+                            <label class="col-form-label">Order date:</label>
+                            <input type="text" th:field="*{createdDate}" readonly class="form-control"
+                                   th:value="${order.createdDate}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group col-sm-12">
+                            <label class="form-label">Payment Method:</label>
+                            <input type="text" th:field="*{paymentMethod}" readonly class="form-control"
+                                   th:value="${order.paymentMethod}">
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class=" col-form-label">Order status:</label>
+                            <select th:value="${order.orderStatus}" th:field="*{orderStatus}" id="orderStatus"
+                                    name="orderStatus" class="form-control">
+                                <option value="NEW">NEW</option>
+                                <option value="CANCELLED">CANCELLED</option>
+                                <option value="DELIVERED">DELIVERED</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row order-books">
+        <div class="col-md-12">
+            <div class="row ">
+                <div class="col-md-6 ">
+                    <th:block th:each="orderItem, status: ${order.orderItems}">
+                        <div class="row mb-3 " th:with="book = ${orderItem.book}" th:if="${status.index % 2 == 0}">
+                            <div class="col-sm-1">
+                                <div class="div-count" th:text="${status.index + 1}"></div>
+                            </div>
+                            <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                                <img th:src="${book.book_image}" class="img-fluid" alt="book"/>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-wrap">
+                                    <p class="inline" style="font-weight: bold; color: #0b0b0b; font-size: 20px"
+                                       th:text="${book.name}"></p>
+                                </div>
+                                <div class="text-wrap">
+                                    <p class="inline">Product Cost: </p>
+                                    <div class="inline" th:text="${orderItem.unitPrice}"/>
+                                </div>
+                                <div class="text-wrap">
+                                    <p class="inline">Subtotal: </p>
+                                    <div class="inline" th:text="${orderItem.quantity}"/>
+                                    x
+                                    <div class="inline" th:text="${orderItem.unitPrice}"/>
+                                    =
+                                    <div class="inline" th:text="${orderItem.subtotal}"/>
+                                </div>
+                                <div class="text-wrap">
+                                    <p class="inline">Shipping Cost: </p>
+                                    <div class="inline" th:text="${orderItem.shippingCost}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+                <div class="col-md-6">
+                    <th:block th:each="orderItem, status: ${order.orderItems}">
+                        <div class="row mb-3" th:with="book = ${orderItem.book}" th:if="${status.index % 2 == 1}">
+                            <div class="col-sm-1">
+                                <div class="div-count" th:text="${status.index + 1}"></div>
+                            </div>
+                            <div class="col-sm-3 d-flex justify-content-center align-items-center">
+                                <img th:src="${book.book_image}" class="img-fluid" alt="book"/>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="text-wrap">
+                                    <p class="inline" style="font-weight: bold; color: #0b0b0b; font-size: 20px"
+                                       th:text="${book.name}"></p>
+                                </div>
+                                <div class="text-wrap">
+                                    <p class="inline">Product Cost: </p>
+                                    <div class="inline" th:text="${book.salePrice}"/>
+                                </div>
+                                <div class="text-wrap">
+                                    <p class="inline">Subtotal: </p>
+                                    <div class="inline" th:text="${orderItem.quantity}"/>
+                                    x
+                                    <div class="inline" th:text="${orderItem.productCost}"/>
+                                    =
+                                    <div class="inline" th:text="${orderItem.subtotal}"/>
+                                </div>
+                                <div class="text-wrap">
+                                    <p class="inline">Shipping Cost: </p>
+                                    <div class="inline" th:text="${orderItem.shippingCost}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Wrapper END -->
+
+</body>
+
+</html>

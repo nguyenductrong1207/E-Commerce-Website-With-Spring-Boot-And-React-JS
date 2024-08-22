@@ -1,0 +1,170 @@
+@ -0,0 +1,169 @@
+<head th:replace="Admin/admin-template.html :: header('User Detail')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between bottomColor">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Basic Information</h4>
+                            </div>
+                            <!--                            <div class="iq-card-header-toolbar d-flex align-items-center">-->
+                            <!--                                <a th:href="@{'/user-management/edit/' + ${user.id}}" class="btn btn-primary">Edit User-->
+                            <!--                                    Detail</a>-->
+                            <!--                            </div>-->
+                        </div>
+                        <div class="iq-card-body">
+                            <form th:action="@{/user-detail/update}" th:object="${user}" method="post">
+                                <div class="row mb-3">
+                                    <div class="col-lg-3 text-center">
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <h5 th:text="${user.firstName} + ' ' + ${user.lastName}"></h5>
+                                                <div>
+                                                    <img class="img-fluid avatar-130 rounded mt-3" id="thumbnail"
+                                                         alt="Preview" th:src="${user.avatarURL}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3"></div>
+                                            <div class="form-group col-md-6">
+                                                <label for="userStatus">User Status</label>
+                                                <select th:value="${user.userStatus}" th:field="${user.userStatus}"
+                                                        id="userStatus" name="userStatus" class="form-control">
+                                                    <option value="ABLE">ABLE</option>
+                                                    <option value="DISABLED">DISABLED</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="firstName">First Name</label>
+                                                <input type="text" class="form-control" id="firstName"
+                                                       th:placeholder="${user.firstName}" th:field="${user.firstName}">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="lastName">Last Name</label>
+                                                <input type="text" class="form-control" id="lastName"
+                                                       th:placeholder="${user.lastName}" th:field="${user.lastName}">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="occupation">Occupation</label>
+                                                <input type="text" class="form-control" id="occupation"
+                                                       th:placeholder="${user.occupation}"
+                                                       th:field="${user.occupation}">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="age">Age</label>
+                                                <input type="text" class="form-control" id="age"
+                                                       th:placeholder="${user.age}" th:field="${user.age}">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="description">Description</label>
+                                                <input type="text" class="form-control" id="description"
+                                                       placeholder="User Description" th:field="${user.description}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="iq-card">
+                                            <div class="iq-card-header d-flex justify-content-between bottomColor">
+                                                <div class="iq-header-title">
+                                                    <h4 class="card-title">Contact Information</h4>
+                                                </div>
+                                            </div>
+                                            <div class="iq-card-body">
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="phone" class="form-label">Contact Number</label>
+                                                        <input type="text" class="form-control" id="phone"
+                                                               th:placeholder="${user.phone}" th:field="${user.phone}"
+                                                               maxlength="10">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="email"
+                                                               th:placeholder="${user.email}" th:field="${user.email}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="province">Province</label>
+                                                        <select class="form-control" id="province" name="province"
+                                                                th:field="${user.address.province}">
+                                                            <option selected hidden
+                                                                    th:value="${user.address.province}"
+                                                                    th:text="${#strings.isEmpty(user.address.province)}
+                                                                ?'Select':${#strings.substring(user.address.province,2)}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="district">District</label>
+                                                        <div class="d-flex justify-content-between">
+                                                            <select class="form-control" id="district" name="district"
+                                                                    th:field="${user.address.district}">
+                                                                <option selected hidden
+                                                                        th:value="${user.address.district}"
+                                                                        th:text="${#strings.isEmpty(user.address.district)}
+                                                           ?'Select':${#strings.substring(user.address.district,3)}">
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="ward">Ward</label>
+                                                        <div class="d-flex justify-content-between">
+                                                            <select class="form-control" id="ward" name="ward"
+                                                                    th:field="${user.address.ward}">
+                                                                <option selected hidden th:value="${user.address.ward}"
+                                                                        th:text="${#strings.isEmpty(user.address.ward)}
+                                                           ?'Select':${user.address.ward}">
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="full-address">Address
+                                                            description</label>
+                                                        <input type="text" class="form-control" id="full-address"
+                                                               th:placeholder="${#strings.isEmpty(user.address.description)}
+                                                       ?'Example: No.X, Apartment Y, Street Z...':${user.address.description}"
+                                                               th:field="*{address.description}">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Update Information</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Wrapper END -->
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
+
+</html>

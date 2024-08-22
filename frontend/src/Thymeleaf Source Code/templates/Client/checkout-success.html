@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Client/client-template.html :: head('Bookland Store')"></head>
+<body>
+<div class="page-wraper">
+    <div class="error-page overlay-secondary-dark" style="background-image: url(/Client/images/background/bg3.jpg);">
+        <div class="error-inner text-center">
+            <div class="dz_error checkout-success" data-text="Successfully">Successfully</div>
+            <h5 class="error-head">Thank you so much for your order! We truly appreciate your support and are excited
+                for you to receive your items. Your purchase means a lot to us, and we hope you love everything you
+                ordered. If you have any questions or need anything at all, please don't hesitate to reach out. We're
+                here to help!</h5>
+            <a th:href="@{/}" class="btn btn-primary btn-border btnhover white-border">BACK TO HOMEPAGE</a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:insert="Client/client-template.html :: footer"></div>
+
+</body>
+</html>

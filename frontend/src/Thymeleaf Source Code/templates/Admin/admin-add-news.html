@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="Admin/admin-template.html :: header('Add New Article')">
+
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">[[${pageTitle}]]</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form th:action="@{/admin-add-news/save}" method="post" th:object="${news}"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" th:field="*{id}">
+                                <input type="hidden" th:field="*{newsImage}">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>News Title: </label>
+                                            <input class="form-control" minlength="3" required
+                                                   type="text" th:field="*{title}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Author: </label>
+                                            <input class="form-control" minlength="3" required
+                                                   type="text" th:field="*{author_news}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Publication date: </label>
+                                            <input type="date" class="form-control" required th:field="*{publication}"
+                                                   th:value="${news.publication != null ? #temporals.format(news.publication, 'yyyy-MM-dd') : ''}"
+                     >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>News Image:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="fileImage"
+                                                       name="fileImage"
+                                                       accept="image/*">
+                                                <label class="custom-file-label" for="fileImage">Choose file</label>
+                                            </div>
+                                            <img class="img-fluid avatar-100 rounded mt-3" id="thumbnail" alt="Preview"
+                                                 th:src="*{newsImage}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <label>Book Category:</label>
+                                        <div class="row">
+                                            <div class="col-md-3" th:each="category: ${categories}">
+                                                <input name="categories" type="checkbox" th:field="${news.categories}"
+                                                       th:value="${category.id}">
+                                                <label th:text="${category.name}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Summary:</label>
+                                    <textarea th:field="*{shortDescription}" class="form-control" id="description" type="text"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description:</label>
+                                    <textarea th:field="*{description_news}" class="form-control" id="fullDescription" type="text"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper END -->
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#description").richText();
+        $("#fullDescription").richText();
+    })
+</script>

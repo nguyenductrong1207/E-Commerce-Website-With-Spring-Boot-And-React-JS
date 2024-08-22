@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Admin/admin-template.html :: header('Order Management')">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <div class="iq-sidebar" th:insert="Admin/admin-template.html :: sidebar">
+    </div>
+
+    <!-- Top Nav Bar -->
+    <div class="iq-top-navbar" th:insert="Admin/admin-template.html :: topNavbar">
+    </div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+<!--                        <div class="iq-card-header d-flex justify-content-between">-->
+<!--                            <div class="iq-header-title">-->
+<!--                                <h4 class="card-title">Orders List</h4>-->
+<!--                            </div>-->
+<!--                            <div class="iq-card-header-toolbar d-flex align-items-center">-->
+<!--                                <a th:href="@{'/admin-add-order'}" class="btn btn-primary">Add New Order</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 3%;">No</th>
+                                        <th style="width: 15%;">First name</th>
+                                        <th style="width: 15%;">Last name</th>
+                                        <th style="width: 15%;">Order date</th>
+                                        <th style="width: 15%;">Order status</th>
+                                        <th style="width: 15%;">Total</th>
+                                        <th style="width: 5%;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="order : ${listOrders}">
+                                        <tr>
+                                            <td th:text="${order.id}"></td>
+                                            <td th:text="${order.firstName}"></td>
+                                            <td th:text="${order.lastName}"></td>
+                                            <td th:text="${order.getCreatedDate}"></td>
+                                            <td th:text="${order.orderStatus}"></td>
+                                            <td th:text="${order.total}"></td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action text-center">
+                                                    <a class="linkOrderDetail bg-primary" data-toggle="tooltip" data-placement="top"
+                                                       title=""
+                                                       data-original-title="Detail"
+                                                       th:href="@{'/admin-orders/detail/' + ${order.id}}"><i
+                                                            class=" ri-book-read-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Wrapper END -->
+<div class="modal fade" id="orderDetailModal">
+    <div class="modal-dialog modal-xl" >
+        <div class="modal-content" style="width: 80vw"></div>
+    </div>
+</div>
+
+<div th:replace="Admin/admin-template.html :: footer">
+</div>
+</body>
+
+</html>
